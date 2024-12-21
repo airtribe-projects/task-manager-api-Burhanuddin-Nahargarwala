@@ -9,7 +9,7 @@ tap.test("POST /tasks", async (t) => {
     description: "New Task Description",
     completed: false,
   };
-  const response = await server.post("/tasks").send(newTask);
+  const response = await server.post("/api/v1/tasks").send(newTask);
   t.equal(response.status, 201);
   t.end();
 });
@@ -18,13 +18,13 @@ tap.test("POST /tasks with invalid data", async (t) => {
   const newTask = {
     title: "New Task",
   };
-  const response = await server.post("/tasks").send(newTask);
+  const response = await server.post("/api/v1/tasks").send(newTask);
   t.equal(response.status, 400);
   t.end();
 });
 
 tap.test("GET /tasks", async (t) => {
-  const response = await server.get("/tasks");
+  const response = await server.get("/api/v1/tasks");
   t.equal(response.status, 200);
   t.hasOwnProp(response.body[0], "id");
   t.hasOwnProp(response.body[0], "title");
@@ -38,7 +38,7 @@ tap.test("GET /tasks", async (t) => {
 });
 
 tap.test("GET /tasks/:id", async (t) => {
-  const response = await server.get("/tasks/1");
+  const response = await server.get("/api/v1/tasks/1");
   t.equal(response.status, 200);
   const expectedTask = {
     id: 1,
@@ -51,7 +51,7 @@ tap.test("GET /tasks/:id", async (t) => {
 });
 
 tap.test("GET /tasks/:id with invalid id", async (t) => {
-  const response = await server.get("/tasks/999");
+  const response = await server.get("/api/v1/tasks/999");
   t.equal(response.status, 404);
   t.end();
 });
@@ -62,7 +62,7 @@ tap.test("PUT /tasks/:id", async (t) => {
     description: "Updated Task Description",
     completed: true,
   };
-  const response = await server.put("/tasks/1").send(updatedTask);
+  const response = await server.put("/api/v1/tasks/1").send(updatedTask);
   t.equal(response.status, 200);
   t.end();
 });
@@ -73,7 +73,7 @@ tap.test("PUT /tasks/:id with invalid id", async (t) => {
     description: "Updated Task Description",
     completed: true,
   };
-  const response = await server.put("/tasks/999").send(updatedTask);
+  const response = await server.put("/api/v1/tasks/999").send(updatedTask);
   t.equal(response.status, 404);
   t.end();
 });
@@ -84,19 +84,19 @@ tap.test("PUT /tasks/:id with invalid data", async (t) => {
     description: "Updated Task Description",
     completed: "true",
   };
-  const response = await server.put("/tasks/1").send(updatedTask);
+  const response = await server.put("/api/v1/tasks/1").send(updatedTask);
   t.equal(response.status, 400);
   t.end();
 });
 
 tap.test("DELETE /tasks/:id", async (t) => {
-  const response = await server.delete("/tasks/1");
+  const response = await server.delete("/api/v1/tasks/1");
   t.equal(response.status, 200);
   t.end();
 });
 
 tap.test("DELETE /tasks/:id with invalid id", async (t) => {
-  const response = await server.delete("/tasks/999");
+  const response = await server.delete("/api/v1/tasks/999");
   t.equal(response.status, 404);
   t.end();
 });
