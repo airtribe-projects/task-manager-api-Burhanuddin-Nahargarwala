@@ -89,6 +89,12 @@
       "title": "Install jsonwebtoken",
       "description": "Install jsonwebtoken",
       "completed": false
+    },
+    {
+      "title": "Install python interpreter",
+      "description": "Install pandas library",
+      "completed": true,
+      "id": 16
     }
   ]
 }
