@@ -1,6 +1,12 @@
 {
   "tasks": [
     {
+      "id": 1,
+      "title": "Set up environment",
+      "description": "Install Node.js, npm, and git",
+      "completed": true
+    },
+    {
       "id": 2,
       "title": "Create a new project",
       "description": "Create a new project using the Express application generator",
@@ -85,9 +91,9 @@
       "completed": false
     },
     {
-      "title": "New Task",
-      "description": "New Task Description",
-      "completed": false,
+      "title": "Install python interpreter",
+      "description": "Install pandas library",
+      "completed": true,
       "id": 16
     }
   ]

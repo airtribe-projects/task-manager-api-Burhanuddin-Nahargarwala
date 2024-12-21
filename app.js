@@ -17,13 +17,7 @@ app.use(logger)
 // Utility Functions
 const readTasksFile = () => {
     try {
-        const data = fs.readFileSync('./task.json', 'utf-8', (err, data) => {
-            if (err) {
-                console.log(err)
-                throw err;
-            }
-        });
-
+        const data = fs.readFileSync('./task.json', 'utf-8');
         return JSON.parse(data).tasks;
     } catch (err) {
         throw new Error('Error reading tasks file');
@@ -32,12 +26,7 @@ const readTasksFile = () => {
 
 const writeTasksFile = (tasks) => {
     try {
-        fs.writeFile('./task.json', JSON.stringify({ tasks }, null, 2), (err, data) => {
-            if (err) {
-                console.log(err)
-                throw err;
-            }
-        });
+        fs.writeFileSync('./task.json', JSON.stringify({ tasks }, null, 2));
 
     } catch (err) {
         throw new Error('Error writing to tasks file');
@@ -148,8 +137,6 @@ app.delete("/api/v1/tasks/:id", (req, res) => {
         if (taskIndex === -1) {
             return res.status(404).send({ message: "Task not found!" });
         }
-
-        // const remainingTasks = tasks.filter((task) => task.id != id)
 
         // remove the element
         tasks.splice(taskIndex, 1);
